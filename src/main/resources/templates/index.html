@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Motivational Quote</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg-1: #0f172a;
+            --bg-2: #111827;
+            --card: rgba(15, 23, 42, 0.72);
+            --border: rgba(255, 255, 255, 0.12);
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-strong: #22c55e;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top, rgba(56, 189, 248, 0.26), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.2), transparent 28%),
+                linear-gradient(160deg, var(--bg-1), var(--bg-2));
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .shell {
+            width: min(760px, 100%);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            margin-bottom: 18px;
+        }
+
+        .badge-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.55);
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            padding: 36px;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: var(--card);
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(18px);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), transparent 45%);
+            pointer-events: none;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .subtitle {
+            margin: 0 0 28px;
+            max-width: 60ch;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .quote {
+            margin: 0;
+            padding: 28px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.55);
+            font-size: clamp(1.4rem, 2.7vw, 2.15rem);
+            line-height: 1.55;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            white-space: pre-wrap;
+        }
+
+        .author {
+            margin: 16px 0 0;
+            color: var(--muted);
+            font-size: 1rem;
+            font-style: italic;
+            text-align: right;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            color: #08111f;
+            background: linear-gradient(135deg, #7dd3fc, #4ade80);
+            box-shadow: 0 16px 32px rgba(56, 189, 248, 0.24);
+        }
+
+        .footer {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                padding: 24px;
+                border-radius: 22px;
+            }
+
+            .quote {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Daily motivation, served fresh</span>
+        </div>
+
+        <section class="card">
+            <h1>Keep moving forward.</h1>
+            <p class="subtitle">
+                A clean, focused space for the next quote that shows up from your API.
+            </p>
+
+            <blockquote class="quote" th:text="${quote}">Your quote will appear here.</blockquote>
+            <p class="author" th:text="${author}">Unknown author</p>
+
+            <div class="actions">
+                <a class="button button-primary" href="/quote">Refresh quote</a>
+            </div>
+
+            <div class="footer">Small steps become big wins.</div>
+        </section>
+    </main>
+</body>
+</html>
