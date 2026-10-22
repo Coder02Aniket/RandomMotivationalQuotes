@@ -162,6 +162,11 @@
     </style>
 </head>
 <body>
+    <script>
+        if (window.location.pathname === "" || window.location.pathname === "/") {
+            window.location.replace("/quote");
+        }
+    </script>
     <main class="shell">
         <div class="badge">
             <span class="badge-dot"></span>

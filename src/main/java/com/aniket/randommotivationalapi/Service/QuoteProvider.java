@@ -15,6 +15,8 @@ import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -84,7 +86,7 @@ public class QuoteProvider implements IQuoteProvider {
     }
 
     @PreDestroy
-    private void saveBeforeShutdown() {
+    private void saveBeforeShutdown() throws IOException , InterruptedException {
         //Create a file for saving current state of the system before shutting down...
 /**
  * Changing Unreadable serialization to readable JSON
@@ -96,6 +98,8 @@ public class QuoteProvider implements IQuoteProvider {
 
 
 //        oos.close();
+        Files.deleteIfExists(Paths.get("cache.json"));
+
 
         objMapper.writerWithDefaultPrettyPrinter().writeValue(new File("cache.json"), cache);
 

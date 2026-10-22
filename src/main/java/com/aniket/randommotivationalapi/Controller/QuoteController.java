@@ -36,3 +36,11 @@ public class QuoteController {
     }
 
 }
+
+@Controller
+class Redirector{
+    @GetMapping(value= {"/" , ""})
+    public String redirect(Model model){
+        return "redirect:/quote";
+    }
+}
